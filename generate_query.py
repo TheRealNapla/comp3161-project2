@@ -21,7 +21,7 @@ with open('accounts.csv', 'r') as csvfile:
         account_type = row["Account Type"]
 
         # Append the values to the SQL query
-        sql_query += f"({user_id}, '{name}', {email}, '{password}', '{account_type}'), "
+        sql_query += f"({user_id}, '{name}', '{email}', '{password}', '{account_type}'), "
 
     # Remove the last comma and space from the SQL query
     sql_query = sql_query[:-2]
