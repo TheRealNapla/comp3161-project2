@@ -22,25 +22,23 @@ print(random_date(d1, d2))
 columns = {
     'SectionID': int,
     'Section_Name': str,
-    'Links': str,
-    'Lecture_Slides': str,
     'Active': str,
+    'Course_id': str,
 }
 
 # Define the range of values for each column
 ranges = {
     'Section_ID': (1, 13),
     'Section_Name': ('Course Information', 'Lecture Slides', 'Quizzes', 'Midsemester Examination', 'Assignments', 'Past Papers', 'Additional Resources'),
-    'Links': (1, 1000),
-    'Lecture_Slides': (1, 1000),
-    'Active': ('Y','N')
+    'Active': ('Y','N'),
+    'Course_id':()
 }
 
 # Generate fake data
 data = []
 for i in range(100, 299):
     forum_id = i
-    discussion_name = random.choice(ranges['Discussion_Name'])
+    discussion_name = random.choice(ranges['Section_Name'])
     date_posted = random_date(d1, d2)
     active = random.choice(ranges['Active'])
     data.append((forum_id, discussion_name, date_posted, active))
