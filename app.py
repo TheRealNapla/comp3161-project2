@@ -19,10 +19,33 @@ def get_courses():
         cursor = cnx.cursor()
         cursor.execute('SELECT * FROM courses')
         courses = []
-        for Course_id, Coursename, CourseLecturer, Coursegrade in cursor:
+        for Course_id, Coursename, Lecturer_ID, CourseLecturer, Coursegrade in cursor:
             course = {}
             course['Course_id'] = Course_id
             course['Coursename'] = Coursename
+            course['Lecturer_ID'] = Lecturer_ID
+            course['CourseLecturer'] = CourseLecturer
+            course['Coursegrade'] = Coursegrade
+            courses.append(course)
+        cursor.close()
+        cnx.close()
+        return make_response(courses, 200)
+    except:
+        return make_response({'error': "An error has occurred"}, 400)
+
+@app.route("/courses/<lecturer_id>")
+#Retrieves all courses taught by a particular lecturer
+def get_lecturer_courses(lecturer_id):
+    try:
+        cnx = mysql.connector.connect(user='root', password='', host='localhost', database='betterourvle')
+        cursor = cnx.cursor()
+        cursor.execute(f"SELECT * FROM courses WHERE Lecturer_ID='{lecturer_id}'")
+        courses = []
+        for Course_id, Coursename, Lecturer_ID, CourseLecturer, Coursegrade in cursor:
+            course = {}
+            course['Course_id'] = Course_id
+            course['Coursename'] = Coursename
+            course['Lecturer_ID'] = Lecturer_ID
             course['CourseLecturer'] = CourseLecturer
             course['Coursegrade'] = Coursegrade
             courses.append(course)
@@ -33,6 +56,7 @@ def get_courses():
         return make_response({'error': "An error has occurred"}, 400)
 
 @app.route("/calendar/<course_id>")
+#Retrieves all calendar events for a particular course
 def get_calendar(course_id):
     try:
         cnx = mysql.connector.connect(user='root', password='', host='localhost', database='betterourvle')
