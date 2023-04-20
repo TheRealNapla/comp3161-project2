@@ -5,23 +5,22 @@ import os
 print(os.getcwd())
 
 # Open the CSV file and create a reader object
-with open('accounts.csv', 'r') as csvfile:
+with open('fake_data.csv', 'r') as csvfile:
     reader = csv.DictReader(csvfile)
 
     # Initialize the SQL query
-    sql_query = "INSERT INTO account (UserID, Name, Email, Password, Account_Type) VALUES "
+    sql_query = "INSERT INTO discussionthreads (Forum_ID, Discussion_Name, Date_Posted, Active) VALUES "
 
     # Loop through each row in the CSV file and append values to the SQL query
     for row in reader:
         # Extract the data from the current row
-        user_id = row['ID']
-        name = row['Name']
-        email = row['Email']
-        password = row['Password']
-        account_type = row["Account Type"]
+        forum_id = row['ï»¿Forum_ID']
+        name = row['Discussion_Name']
+        date = row['Date_Posted']
+        active = row["Active"]
 
         # Append the values to the SQL query
-        sql_query += f"({user_id}, '{name}', '{email}', '{password}', '{account_type}'), "
+        sql_query += f"({forum_id}, '{name}', '{date}', '{active}'), "
 
     # Remove the last comma and space from the SQL query
     sql_query = sql_query[:-2]
@@ -30,5 +29,5 @@ with open('accounts.csv', 'r') as csvfile:
     sql_query += ";"
 
     # Print the SQL query
-    with open(f"accounts_query.sql", "w") as f:
+    with open(f"discussionforums_query.sql", "w") as f:
             f.write(sql_query)
