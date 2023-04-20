@@ -29,9 +29,10 @@ columns = {
 
 # Define the range of values for each column
 ranges = {
-    'Forum_ID': (100, 299),
-    'Discussion_Name': ('Assignment Posted', 'Assignment Grades Available', 'All of You Failed', 'All of You Passed', 'Exams are Around the Corner', 'Bonus Marks Available', 'Make Sure You Studied'),
-    'Date_Posted': (1, 1000),
+    'Section_ID': (1, 13),
+    'Section_Name': ('Course Information', 'Lecture Slides', 'Quizzes', 'Midsemester Examination', 'Assignments', 'Past Papers', 'Additional Resources'),
+    'Links': (1, 1000),
+    'Lecture_Slides': (1, 1000),
     'Active': ('Y','N')
 }
 
