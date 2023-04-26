@@ -8,8 +8,38 @@ def home():
     return "Hello, Flask!"
 
 @app.route("/register")
-def register_user():
-    return "Hello, Flask!"
+@requires_auth
+@is_role(["admin"])
+def register():
+    try: 
+        cnx = mysql.connector.connect( 
+            user="root", password="", host="localhost", database="betterourvle" 
+        ) 
+
+        cursor = cnx.cursor() 
+        content = request.json 
+        user_id = content["UserID"] 
+        name = content["Name"] 
+        email = content["Email"] 
+        password = get_password_hash(content["Password"])
+        type = content["Account_Type"] 
+         
+
+        cursor.execute( 
+            f"INSERT INTO account (`Name`, `Email`, `Password`, `Account_Type`) VALUES('{user_id}','{name}','{email}', '{password}', '{type}')" 
+        ) 
+        cnx.commit() 
+
+        cursor.execute( 
+            f"INSERT INTO {type}({role}Id) VALUES('{id}')" 
+        ) 
+        cnx.commit() 
+        cursor.close() 
+        cnx.close() 
+        return make_response({"success": "Account created"}, 201) 
+    except Exception as e: 
+        return make_response({"error": str(e)}, 400) 
+
 
 @app.route("/courses")
 #Retrieves all courses
