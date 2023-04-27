@@ -1,3 +1,4 @@
 .xlsx
-.csv
 Enrol_Script.py
+
+__pycache__
