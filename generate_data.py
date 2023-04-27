@@ -20,28 +20,26 @@ print(random_date(d1, d2))
 
 # Define the columns and their data types
 columns = {
+    'Item_ID': int,
+    'ItemName': str,
     'SectionID': int,
-    'Section_Name': str,
-    'Active': str,
-    'Course_id': str,
 }
 
 # Define the range of values for each column
 ranges = {
-    'Section_ID': (1, 13),
-    'Section_Name': ('Course Information', 'Lecture Slides', 'Quizzes', 'Midsemester Examination', 'Assignments', 'Past Papers', 'Additional Resources'),
-    'Active': ('Y','N'),
-    'Course_id':()
+    'Item_ID': (1, 13),
+    'ItemName': ('Section Item 1', 'Section Item 2', 'Section Item 3', 'Section Item 4', 'Section Item 5', 'Section Item 6'),
+    'SectionID':range(1, 1562)
 }
 
 # Generate fake data
 data = []
-for i in range(100, 299):
-    forum_id = i
-    discussion_name = random.choice(ranges['Section_Name'])
-    date_posted = random_date(d1, d2)
-    active = random.choice(ranges['Active'])
-    data.append((forum_id, discussion_name, date_posted, active))
+for section_id in ranges['SectionID']:
+    for i in range(1, 4):
+        item_id = i
+        discussion_name = random.choice(ranges['ItemName'])
+        active = random.choice(ranges['SectionID'])
+        data.append((item_id, discussion_name, section_id))
 
 # Create a new workbook and sheet
 wb = Workbook()
@@ -57,4 +55,4 @@ for i, row_data in enumerate(data):
         ws.cell(row=i+2, column=j+1, value=row_data[j])
 
 # Save the workbook to an XLSX file
-wb.save("fake_data.xlsx")
+wb.save("sectionitem_data.xlsx")

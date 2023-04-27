@@ -257,10 +257,10 @@ def course_registration():
         cnx.commit()
         cnx.close()
         return {"success":"Course Registration Successful"}
-    elif count > 6:
-        return {"error":"You cant register for this coruse, you can register for a max of 6 courses "}
+    elif count >= 6:
+        return {"error":"You cant register for this course, you can register for a max of 6 courses "}
     elif course is None:
-        return {"error": "Course ID incorect"}
+        return {"error": "Course ID incorrect"}
     else:
         return{"error":"Student not found check the student ID"}
 

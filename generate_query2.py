@@ -5,7 +5,7 @@ import os
 print(os.getcwd())
 
 # Open the CSV file and create a reader object
-with open('student_grades.csv', 'r') as csvfile:
+with open('Enrol.csv', 'r') as csvfile:
     reader = csv.DictReader(csvfile)
 
     # Initialize the SQL query and row counter
@@ -16,11 +16,11 @@ with open('student_grades.csv', 'r') as csvfile:
     for row in reader:
         # Extract the data from the current row
         forum_id = row['Student_ID']
-        name = row['Course_id']
-        date = row['Grade']
+        name = row['Course_ID']
+        grade = row['Grade']
 
         # Append the values to the SQL query
-        sql_query += f"({forum_id}, '{name}', {date}), "
+        sql_query += f"({forum_id}, '{name}', {grade}), "
         row_count += 1
 
         # Check if the row count is divisible by 1000 or if it's the last row
@@ -32,7 +32,7 @@ with open('student_grades.csv', 'r') as csvfile:
             sql_query += ";"
 
             # Write the SQL query to the SQL file
-            with open(f"enrol_query.sql", "a") as f:
+            with open(f"newenrol_query.sql", "a") as f:
                 f.write(sql_query)
 
             # Reset the SQL query for the next batch of rows
