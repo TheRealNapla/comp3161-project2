@@ -5,21 +5,23 @@ import os
 print(os.getcwd())
 
 # Open the CSV file and create a reader object
-with open('student_grades.csv', 'r') as csvfile:
+with open('sectionitem_data.csv', 'r') as csvfile:
     reader = csv.DictReader(csvfile)
 
     # Initialize the SQL query
-    sql_query = "INSERT INTO enrol (Student_ID), Course_id, Grade) VALUES "
+    sql_query = "INSERT INTO section_items (ItemName, Course_id, Grade) VALUES "
 
     # Loop through each row in the CSV file and append values to the SQL query
     for row in reader:
+        print(row)
         # Extract the data from the current row
-        forum_id = row['Student_ID']
-        name = row['Course_id']
-        date = row['Grade']
+        forum_id = row['ItemName']
+        name = row['CourseID']
+        grade = row['Grade']
+        
 
         # Append the values to the SQL query
-        sql_query += f"({forum_id}, '{name}', {date}), "
+        sql_query += f"('{forum_id}', {name}), "
 
     # Remove the last comma and space from the SQL query
     sql_query = sql_query[:-2]
