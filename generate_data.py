@@ -23,6 +23,7 @@ columns = {
     'Item_ID': int,
     'ItemName': str,
     'SectionID': int,
+    'Date': str,
 }
 
 # Define the range of values for each column
@@ -39,7 +40,8 @@ for section_id in ranges['SectionID']:
         item_id = i
         discussion_name = random.choice(ranges['ItemName'])
         active = random.choice(ranges['SectionID'])
-        data.append((item_id, discussion_name, section_id))
+        date=random_date(d1, d2)
+        data.append((item_id, discussion_name, section_id, date))
 
 # Create a new workbook and sheet
 wb = Workbook()
@@ -55,4 +57,4 @@ for i, row_data in enumerate(data):
         ws.cell(row=i+2, column=j+1, value=row_data[j])
 
 # Save the workbook to an XLSX file
-wb.save("sectionitem_data.xlsx")
+wb.save("dates.xlsx")
